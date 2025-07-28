@@ -41,8 +41,15 @@ EOF
   echo "Appended pyenv-virtualenv init to ~/.zshrc"
 fi
 
-echo "Reloading your shell..."
-exec "$SHELL" -l
+echo "Reloading pyenv into this script’s environment…"
+# load login‐shell changes
+if [ -f ~/.zprofile ]; then
+  . ~/.zprofile
+fi
+# load interactive‐shell changes
+if [ -f ~/.zshrc ]; then
+  . ~/.zshrc
+fi
 
 echo "=== 4. Install Python 3.11.5 & create a virtualenv ==="
 pyenv install -s 3.11.5
